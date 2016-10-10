@@ -18,7 +18,7 @@
                     var fields = [];
                     var header = [];
                     var separator = scope.separator || ';';
-                    var withHeader = !!scope.withHeader ? scope.withHeader : true;
+                    var withHeader = scope.withHeader === undefined ? true : scope.withHeader;
 
                     angular.forEach(scope.reportFields, function(field, key) {
                         if(!field || !key) {
