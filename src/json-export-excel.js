@@ -9,7 +9,8 @@
                     data : '=',
                     filename: '=?',
                     reportFields: '=',
-                    separator: '@'
+                    separator: '@',
+                    withHeader: '=?'
                 },
                 link: function (scope, element) {
                     scope.filename = !!scope.filename ? scope.filename : 'export-excel';
@@ -17,6 +18,7 @@
                     var fields = [];
                     var header = [];
                     var separator = scope.separator || ';';
+                    var withHeader = !!scope.withHeader ? scope.withHeader : true;
 
                     angular.forEach(scope.reportFields, function(field, key) {
                         if(!field || !key) {
@@ -80,7 +82,11 @@
                     }
 
                     function _convertToExcel(body) {
-                        return header.join(separator) + '\n' + body;
+                        if (withHeader) {
+                            return header.join(separator) + '\n' + body;
+                        } else {
+                            return body;
+                        }
                     }
 
                     function _objectToString(object) {
